@@ -1,0 +1,92 @@
+:root {
+  --bg: #14110f; --panel: #221c18; --panel2: #2d2520; --line: #4a3c32; --text: #efe6da; --dim: #a39483;
+  --gold: #d9a441; --red: #d2553f; --green: #6fae5c; --blue: #5b8fc7;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif; }
+button { font: inherit; color: var(--text); background: var(--panel2); border: 1px solid var(--line);
+  border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+button:hover { border-color: var(--gold); }
+button.big, button.primary { background: var(--gold); color: #1c1408; border-color: var(--gold); font-weight: 600; }
+button.on { border-color: var(--gold); color: var(--gold); }
+button:disabled { opacity: .4; cursor: default; }
+input { font: inherit; color: var(--text); background: #100d0b; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; min-width: 0; }
+.hidden { display: none !important; }
+.screen { height: 100%; }
+
+#lobby { display: flex; flex-direction: column; align-items: center; padding: 8vh 16px 16px; }
+#lobby h1 { font-size: 56px; margin: 0; letter-spacing: .3em; color: var(--gold); }
+.sub { color: var(--dim); margin: 8px 0 28px; }
+.panel { width: 100%; max-width: 420px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.panel h2 { margin: 0; }
+.panel label { display: flex; align-items: center; gap: 10px; }
+.panel label input { flex: 1; }
+.row { display: flex; gap: 10px; }
+.row > * { flex: 1; }
+.hint { color: var(--dim); font-size: 13px; line-height: 1.7; margin: 0; }
+#members { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+#members li { background: var(--panel2); border-radius: 8px; padding: 8px 12px; }
+#members li.ai { color: var(--dim); }
+#err { color: var(--red); min-height: 1.4em; }
+
+#game { display: flex; flex-direction: column; }
+#top { display: flex; justify-content: space-between; align-items: center; padding: 6px 12px; font-size: 13px; color: var(--dim); border-bottom: 1px solid var(--line); }
+#top button { padding: 3px 10px; font-size: 12px; }
+#table { position: relative; flex: 1; min-height: 240px; }
+#log { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(46%, 420px); height: 40%;
+  overflow-y: auto; font-size: 12px; line-height: 1.6; color: var(--dim); background: #0f0c0acc; border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; pointer-events: auto; }
+#game { position: relative; }
+#log div:last-child { color: var(--text); }
+#log.full { width: 94%; height: 70%; z-index: 20; font-size: 13px; }
+
+.seat { position: absolute; transform: translate(-50%, -50%); width: 132px; background: var(--panel); border: 2px solid var(--line);
+  border-radius: 10px; padding: 6px 8px; font-size: 12px; line-height: 1.45; }
+.seat.cur { border-color: var(--gold); box-shadow: 0 0 12px #d9a44166; }
+.seat.dead { opacity: .45; filter: grayscale(1); }
+.seat.can { border-color: var(--blue); cursor: pointer; border-style: dashed; }
+.seat.sel { border-color: var(--red); border-style: solid; box-shadow: 0 0 12px #d2553f88; }
+.seat .hn { font-size: 15px; font-weight: 700; }
+.seat .pn { color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.seat .hp { color: var(--red); letter-spacing: 1px; }
+.seat .hp i { color: #55473c; font-style: normal; }
+.seat .eq { color: var(--green); }
+.seat .jd { color: #c88ad8; }
+.seat .think { position: absolute; right: 6px; bottom: 4px; color: var(--gold); }
+.role { float: right; font-size: 11px; padding: 0 5px; border-radius: 4px; background: #3a302a; color: var(--dim); }
+.role.lord { background: var(--gold); color: #1c1408; } .role.loyal { background: #b98d3a; color: #1c1408; }
+.role.rebel { background: #3f7a3a; color: #fff; } .role.traitor { background: #4d5fa8; color: #fff; }
+.k蜀 { color: #e0705a; } .k魏 { color: #6fa3dc; } .k吴 { color: #7cc16b; } .k群 { color: #c9c2b8; }
+
+#bottom { border-top: 1px solid var(--line); background: var(--panel); padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 6px; }
+#me { font-size: 13px; display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }
+#me .sk { color: var(--gold); border-bottom: 1px dotted var(--gold); cursor: help; }
+#prompt { min-height: 1.4em; color: var(--gold); font-size: 14px; }
+#actions { display: flex; flex-wrap: wrap; gap: 8px; min-height: 38px; }
+#hand { display: flex; gap: 6px; overflow-x: auto; padding: 14px 2px 4px; min-height: 108px; }
+.card { flex: 0 0 62px; height: 88px; background: #f1e7d3; color: #221a12; border-radius: 7px; border: 2px solid #8a7558; padding: 4px 5px;
+  font-size: 12px; position: relative; transition: transform .1s; user-select: none; }
+.card .nm { font-size: 17px; font-weight: 700; margin-top: 14px; text-align: center; writing-mode: horizontal-tb; }
+.card .st { position: absolute; top: 3px; left: 5px; font-weight: 700; }
+.card .tp { position: absolute; bottom: 3px; right: 5px; font-size: 10px; color: #7a6a55; }
+.card.red .st { color: #c0392b; }
+.card.dim { opacity: .45; }
+.card.can { cursor: pointer; border-color: var(--blue); }
+.card.sel { transform: translateY(-12px); border-color: var(--red); box-shadow: 0 4px 10px #000a; }
+
+#tip { position: fixed; z-index: 50; max-width: 260px; background: #0c0a08; border: 1px solid var(--gold); border-radius: 8px; padding: 8px 10px; font-size: 12px; line-height: 1.6; pointer-events: none; }
+#tip b { color: var(--gold); }
+#over { position: absolute; inset: 0; z-index: 40; background: #000c; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 16px; text-align: center; }
+#over h2 { font-size: 34px; color: var(--gold); margin: 0; }
+#over ul { list-style: none; padding: 0; margin: 0; line-height: 1.9; }
+.heroOpt { text-align: left; max-width: 300px; white-space: normal; }
+.heroOpt small { display: block; color: var(--dim); font-weight: 400; line-height: 1.5; }
+
+@media (max-width: 640px) {
+  .seat { width: 96px; font-size: 10px; padding: 4px 5px; }
+  .seat .hn { font-size: 13px; }
+  #log { width: 44%; height: 34%; font-size: 10px; padding: 5px 6px; }
+  .card { flex-basis: 52px; height: 76px; }
+  .card .nm { font-size: 15px; margin-top: 12px; }
+  #lobby h1 { font-size: 42px; }
+}

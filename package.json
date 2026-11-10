@@ -1,0 +1,14 @@
+{
+  "name": "anke-fengyan",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "烽烟：三国题材身份卡牌对战（联机 + AI）",
+  "scripts": {
+    "start": "node src/server/server.js",
+    "test": "node test/sim.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

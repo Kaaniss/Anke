@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>烽烟</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="lobby" class="screen">
+  <h1>烽烟</h1>
+  <p class="sub">三国题材身份卡牌对战 · 可联机 · 可打电脑</p>
+  <div class="panel" id="entry">
+    <label>昵称 <input id="name" maxlength="12" placeholder="你的名字"></label>
+    <div class="row">
+      <button class="big" data-create="5">创建 5 人局</button>
+      <button class="big" data-create="8">创建 8 人局</button>
+    </div>
+    <div class="row">
+      <input id="code" inputmode="numeric" maxlength="4" placeholder="房间号">
+      <button id="join">加入房间</button>
+    </div>
+    <p class="hint">5 人局：主公1 忠臣1 反贼2 内奸1　｜　8 人局：主公1 忠臣2 反贼4 内奸1<br>开局时空位由电脑补齐，一个人也能开。</p>
+  </div>
+  <div class="panel hidden" id="room">
+    <h2>房间 <span id="roomCode"></span></h2>
+    <p class="hint">把房间号发给朋友，让他们打开同一网址加入。</p>
+    <div class="row" id="sizeRow">
+      <button data-size="5">5 人局</button>
+      <button data-size="8">8 人局</button>
+    </div>
+    <ul id="members"></ul>
+    <div class="row">
+      <button class="big" id="start">开始游戏</button>
+      <button id="leave">离开</button>
+    </div>
+  </div>
+  <p id="err"></p>
+</div>
+
+<div id="game" class="screen hidden">
+  <div id="top"><span id="info"></span><button id="logBtn">战报</button></div>
+  <div id="table"><div id="seats"></div><div id="log"></div></div>
+  <div id="bottom">
+    <div id="me"></div>
+    <div id="prompt"></div>
+    <div id="actions"></div>
+    <div id="hand"></div>
+  </div>
+  <div id="tip" class="hidden"></div>
+  <div id="over" class="hidden"></div>
+</div>
+<script src="client.js"></script>
+</body>
+</html>
